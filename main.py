@@ -1,7 +1,13 @@
 import requests
+from ytmusicapi import YTMusic
+import os
+from datetime import datetime
+
+client_id = os.environ["CLIENT_ID"]
+client_SECRET = os.environ["CLIENT_SECRET"]
 from soup import BeautifulSoup
 URL = "https://www.billboard.com/charts/hot-100/"
-date_to_use = "2002-02-12"
+date_to_use = datetime.now().strftime("%Y-%m-%d")
 """input("Which year would you like to travel? (YYYY-MM-DD)")"""
 
 headers = {
@@ -15,3 +21,4 @@ soup = BeautifulSoup(response.text, "html.parser")
 
 song_names = [name.getText().strip() for name in soup.select("li ul li h3")]
 print(song_names)
+
